@@ -1,0 +1,35 @@
+
+<div *ngIf="medecine">
+    <h2><span jhiTranslate="pharmaApp.medecine.detail.title">Medecine</span> {{medecine.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pharmaApp.medecine.name">Name</span></dt>
+        <dd>
+            <span>{{medecine.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="pharmaApp.medecine.lastupdate">Lastupdate</span></dt>
+        <dd>
+            <span>{{medecine.lastupdate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="pharmaApp.medecine.store">Store</span></dt>
+        <dd>
+            <div *ngIf="medecine.store">
+                <a [routerLink]="['/store', medecine.store?.id]">{{medecine.store?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'medecine/'+ medecine.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

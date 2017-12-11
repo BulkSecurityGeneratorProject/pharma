@@ -1,0 +1,80 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myStoreLabel" jhiTranslate="pharmaApp.store.home.createOrEditLabel">Create or edit a Store</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!store.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="store.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pharmaApp.store.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="store.name"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pharmaApp.store.country" for="field_country">Country</label>
+            <input type="text" class="form-control" name="country" id="field_country"
+                [(ngModel)]="store.country" required />
+            <div [hidden]="!(editForm.controls.country?.dirty && editForm.controls.country?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.country?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pharmaApp.store.city" for="field_city">City</label>
+            <input type="text" class="form-control" name="city" id="field_city"
+                [(ngModel)]="store.city" required />
+            <div [hidden]="!(editForm.controls.city?.dirty && editForm.controls.city?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.city?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pharmaApp.store.latitude" for="field_latitude">Latitude</label>
+            <input type="number" class="form-control" name="latitude" id="field_latitude"
+                [(ngModel)]="store.latitude"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pharmaApp.store.longitude" for="field_longitude">Longitude</label>
+            <input type="number" class="form-control" name="longitude" id="field_longitude"
+                [(ngModel)]="store.longitude"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="pharmaApp.store.datafile" for="field_datafile">Datafile</label>
+            <div>
+                <div *ngIf="store.datafile" class="form-text text-danger clearfix">
+                    <a class="pull-left" (click)="openFile(store.datafileContentType, store.datafile)" jhiTranslate="entity.action.open">open</a><br>
+                    <span class="pull-left">{{store.datafileContentType}}, {{byteSize(store.datafile)}}</span>
+                    <button type="button" (click)="store.datafile=null;store.datafileContentType=null;"
+                            class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_datafile" (change)="setFileData($event, store, 'datafile', false)" jhiTranslate="entity.action.addblob"/>
+            </div>
+            <input type="hidden" class="form-control" name="datafile" id="field_datafile"
+                [(ngModel)]="store.datafile"  />
+            <input type="hidden" class="form-control" name="datafileContentType" id="field_datafileContentType"
+                [(ngModel)]="store.datafileContentType" />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

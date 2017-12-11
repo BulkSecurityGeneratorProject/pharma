@@ -1,0 +1,24 @@
+{
+    "pharmaApp": {
+        "medecine" : {
+            "home": {
+                "title": "Medecines",
+                "createLabel": "Créer un nouveau Medecine",
+                "createOrEditLabel": "Créer ou éditer un Medecine",
+                "search": "Recherche pour Medecine"
+            },
+            "created": "Un nouveau Medecine a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Medecine avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Medecine avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Medecine {{ id }} ?"
+            },
+            "detail": {
+                "title": "Medecine"
+            },
+            "name": "Name",
+            "lastupdate": "Lastupdate",
+            "store": "Store"
+        }
+    }
+}

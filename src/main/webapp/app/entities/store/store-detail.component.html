@@ -1,0 +1,48 @@
+
+<div *ngIf="store">
+    <h2><span jhiTranslate="pharmaApp.store.detail.title">Store</span> {{store.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="pharmaApp.store.name">Name</span></dt>
+        <dd>
+            <span>{{store.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="pharmaApp.store.country">Country</span></dt>
+        <dd>
+            <span>{{store.country}}</span>
+        </dd>
+        <dt><span jhiTranslate="pharmaApp.store.city">City</span></dt>
+        <dd>
+            <span>{{store.city}}</span>
+        </dd>
+        <dt><span jhiTranslate="pharmaApp.store.latitude">Latitude</span></dt>
+        <dd>
+            <span>{{store.latitude}}</span>
+        </dd>
+        <dt><span jhiTranslate="pharmaApp.store.longitude">Longitude</span></dt>
+        <dd>
+            <span>{{store.longitude}}</span>
+        </dd>
+        <dt><span jhiTranslate="pharmaApp.store.datafile">Datafile</span></dt>
+        <dd>
+            <div *ngIf="store.datafile">
+                <a (click)="openFile(store.datafileContentType, store.datafile)" jhiTranslate="entity.action.open">open</a>
+                {{store.datafileContentType}}, {{byteSize(store.datafile)}}
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'store/'+ store.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>
